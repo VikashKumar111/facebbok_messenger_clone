@@ -8,15 +8,23 @@ function App() {
   console.log(messeges);
   
   const sendMessage = (event) => {
+    event.preventDefault();
     setMesseges([...messeges, input]);
     setInput('');
   }
   return (
     <div className="App">
       <h1> Hello programmmers community </h1>
+      
+      <form>
+       <input value={input} onChange={event => setInput(event.target.value)} />
+       <button type='submit' onClick={sendMessage}>Send message</button>
+      </form>
+      
 
-      <input value={input} onChange={event => setInput(event.target.value)} />
-      <button onClick={sendMessage}>Send message</button>
+      {messeges.map(message => (
+        <p>{message}</p>
+      ))}
     </div>
   );
 }
