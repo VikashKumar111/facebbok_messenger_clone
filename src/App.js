@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Button,FormControl ,InputLabel,Input } from '@mui/material';
 import Message from './Message';
-import db from './Firebase';
+import { db } from './firebase';
+
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    db.collection('messeges').onSnapsot(snapshot => {
+    db.collection('messeges').onSnapshot(snapshot => {
       setMesseges(snapshot.docs.map(doc => doc.data()))
     })
   },[])
