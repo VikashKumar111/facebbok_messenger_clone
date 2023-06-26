@@ -4,6 +4,7 @@ import { Button,FormControl ,InputLabel,Input } from '@mui/material';
 import Message from './Message';
 import { db } from './firebase';
 import firebase from 'firebase/compat/app';
+import FlipMove from 'react-flip-move';
 
 
 
@@ -13,10 +14,12 @@ function App() {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    db.collection('messeges').orderBy('timestamp','desc').onSnapshot(snapshot => {
-      setMesseges(snapshot.docs.map(doc => doc.data()))
-    })
-  },[])
+    db.collection('messeges')
+      .orderBy('timestamp', 'desc')
+      .onSnapshot(snapshot => {
+        setMesseges(snapshot.docs.map(doc => ({ id: doc.id, message: doc.data() })))
+      });
+  }, [])
 
   useEffect(() => {
     setUsername(prompt('Please Enter Your Name!!')) 
@@ -32,6 +35,7 @@ function App() {
     })
    setInput('');
   }
+
   return (
     <div className="App">
       <h1> Hello programmmers community </h1>
@@ -44,10 +48,13 @@ function App() {
         <Button disabled={!input} variant="contained" color="primary" type='submit' onClick={sendMessage}>Send message</Button>
        </FormControl>
       </form>
-      
-      {messeges.map(message => (
-        <Message username={username} message={message} />
-      ))}
+      <FlipMove>
+        {
+          messeges.map(({id, message }) => (
+            <Message key={id} username={username} message={message} />
+         ))
+        }
+      </FlipMove>  
     </div>
   );
 }
