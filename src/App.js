@@ -3,20 +3,17 @@ import './App.css';
 import { Button,FormControl ,InputLabel,Input } from '@mui/material';
 import Message from './Message';
 import { db } from './firebase';
+import firebase from 'firebase/compat/app';
 
 
 
 function App() {
   const [input, setInput] = useState('');
-  const [messeges, setMesseges] = useState([
-    { username: 'sonny', message: 'hey guys' },
-    { username: 'qazi', message: 'whats up' },
-    { username: 'vikash', message: 'welcome boys' }
-  ]);
+  const [messeges, setMesseges] = useState([]);
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    db.collection('messeges').onSnapshot(snapshot => {
+    db.collection('messeges').orderBy('timestamp','desc').onSnapshot(snapshot => {
       setMesseges(snapshot.docs.map(doc => doc.data()))
     })
   },[])
@@ -27,8 +24,13 @@ function App() {
   
   const sendMessage = (event) => {
     event.preventDefault();
-    setMesseges([...messeges, { username: username, message: input} ]);
-    setInput('');
+    
+    db.collection('messeges').add({
+      message: input,
+      username: username,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    })
+   setInput('');
   }
   return (
     <div className="App">
