@@ -6,16 +6,20 @@ import Message from './Message';
 
 function App() {
   const [input, setInput] = useState('');
-  const [messeges, setMesseges] = useState(["hello", "Welcome!", "Join our awesome newsletter!"]);
+  const [messeges, setMesseges] = useState([
+    { username: 'sonny', text: 'hey guys' },
+    { username: 'qazi', text: 'whats up' },
+    { username: 'vikash', text: 'welcome boys' }
+  ]);
   const [username, setUsername] = useState('');
 
   useEffect(() => {
     setUsername(prompt('Please Enter Your Name!!')) 
-  },[input]) 
+  },[]) 
   
   const sendMessage = (event) => {
     event.preventDefault();
-    setMesseges([...messeges, input]);
+    setMesseges([...messeges, { username: username, text: input} ]);
     setInput('');
   }
   return (
@@ -32,7 +36,7 @@ function App() {
       </form>
       
       {messeges.map(message => (
-        <Message text={message} />
+        <Message username={message.username} text={message.text} />
       ))}
     </div>
   );
