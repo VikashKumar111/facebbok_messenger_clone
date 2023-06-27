@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Button,FormControl ,InputLabel,Input } from '@mui/material';
+import { FormControl ,Input } from '@mui/material';
 import Message from './Message';
 import { db } from './firebase';
 import firebase from 'firebase/compat/app';
@@ -45,10 +45,10 @@ function App() {
       <h2>Welcome {username}</h2>
       
       <form className='app__form'>
-       <FormControl className='app__formcontrol'>
-        <Input placeholder='Enter the message....' value={input} onChange={event => setInput(event.target.value)} />
+       <FormControl className='app__formControl'>
+        <Input  placeholder='Enter the message....' value={input} onChange={event => setInput(event.target.value)} />
           
-        <IconButton disabled={!input} variant="contained" color="primary" type='submit' onClick={sendMessage}>
+        <IconButton  disabled={!input} variant="contained" color="primary" type='submit' onClick={sendMessage}>
             <SendIcon/>
         </IconButton>
        </FormControl>
