@@ -11,3 +11,8 @@
   background-color: #e9e9eb;
   margin: 30px;
 }
+
+.app__formcontrol{
+  display: flex !important;
+  flex-direction: row !important;
+}
