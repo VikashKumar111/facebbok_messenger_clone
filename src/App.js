@@ -38,10 +38,11 @@ function App() {
 
   return (
     <div className="App">
-      <h1> Hello programmmers community </h1>
+       <h1> Hello programmmers community </h1>
+      <img src='https://scontent.fdel3-3.fna.fbcdn.net/v/t39.8562-6/120009688_325579128711709_1736249742330805861_n.png?_nc_cat=1&ccb=1-7&_nc_sid=6825c5&_nc_ohc=C4YvE4W8WkgAX822_6N&_nc_ht=scontent.fdel3-3.fna&oh=00_AfCOrP9d6brfWb5JaNGTUXwIO-3-b25Ru-xJzH4az0F5CA&oe=649F52BD ' alt='logo'/>
       <h2>Welcome {username}</h2>
       
-      <form>
+      <form className='app__form'>
        <FormControl>
         <InputLabel >Enter a message....</InputLabel>
         <Input value={input} onChange={event => setInput(event.target.value)} />
